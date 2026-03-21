@@ -285,10 +285,35 @@ def delete_or_edit():
                 case _:
                     print('error')
 
+def main_menu():
+    c = '0'
+    while True:
+        print("main menu")
+        print('1. enter 1 to add contact')
+        print("2. enter 2 to view contact list")
+        print("3. enter 3 to search contact")
+        print("4. enter 4 to delete or edit contact")
+        print("5. exit")
+        choice = input("enter your choice:")
+        match choice:
+            case '1':
+                add_contact()
+            case '2':
+                view_contacts()
+            case '3':
+                search_contact()
+            case '4':
+                delete_or_edit()
+            case '5':
+                break
+            case _:
+                pass    
+        
 
-add_contact()
-view_contacts()
-search_contact()
-delete_or_edit()
-view_contacts()
+main_menu()        
+
+
+
+
+
 
