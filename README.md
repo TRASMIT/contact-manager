@@ -3,6 +3,7 @@
 A command-line phonebook application built with Python.
 
 ## Features
+- Main menu with smooth navigation
 - Add contacts with name, phone, and email
 - View all saved contacts
 - Search by name, phone number, or email (partial search supported)
