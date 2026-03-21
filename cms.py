@@ -1,5 +1,21 @@
+import json
+import os
+
+
+def save_contacts():
+    with open("contacts.json", "w") as f:
+        json.dump(contacts, f, indent = 4)
+
+def load_contacts():
+    global contacts
+    if os.path.exists("contacts.json"):
+        with open("contacts.json", "r") as f:
+            contacts = json.load(f)
+
+
 contacts = {}
 print("contact manager started")
+load_contacts()
 
 def add_contact():
     name = input("name:")
@@ -7,6 +23,7 @@ def add_contact():
     email = input("email:")
     contacts[name] = {"phone": phone, "email": email}
     print(name + ' is added')
+    save_contacts()
 
     print('1. enter 1 add another contact')
     print('2. enter any key to exit')
@@ -15,6 +32,7 @@ def add_contact():
     match choice:
         case '1':
             add_contact()
+            save_contacts()
         case _:
             return
 
@@ -92,7 +110,8 @@ def delete_or_edit():
 
                             match d:
                                 case '1':
-                                    list(contacts.pop(n))
+                                    contacts.pop(n)
+                                    save_contacts()
                                 case _:
                                     pass
                     if f == 0:
@@ -111,7 +130,8 @@ def delete_or_edit():
 
                             match d:
                                 case '1':
-                                    list(contacts.pop(name))
+                                    contacts.pop(name)
+                                    save_contacts()
                                 case _:
                                     pass
                     if f == 0:
@@ -130,7 +150,8 @@ def delete_or_edit():
 
                             match d:
                                 case '1':
-                                    list(contacts.pop(name))
+                                    contacts.pop(name)
+                                    save_contacts()
                                 case _:
                                     pass
                     if f == 0:
@@ -169,7 +190,8 @@ def delete_or_edit():
                                         case '1':
                                             newn = input("enter the new name:")
                                             contacts[newn] = contacts[n]
-                                            list(contacts.pop(n))
+                                            contacts.pop(n)
+                                            save_contacts()
                                         case '2':
                                             newp = input("enter new phone number:")
                                             info['phone'] = newp
@@ -190,7 +212,7 @@ def delete_or_edit():
                     for name, info in list(contacts.items()):
                         if num in str(info['phone']):
                             f += 1
-                            print("do you want to edit", n, info['phone'], info['email'])
+                            print("do you want to edit", name, info['phone'], info['email'])
                             print("enter 1 to edit")
                             print("enter any key to exit")
                             d = input("enter your choice:")
@@ -205,8 +227,9 @@ def delete_or_edit():
                                     match e:
                                         case '1':
                                             newn = input("enter the new name:")
-                                            contacts[newn] = contacts[n]
-                                            list(contacts.pop(n))
+                                            contacts[newn] = contacts[name]
+                                            contacts.pop(name)
+                                            save_contacts()
                                         case '2':
                                             newp = input("enter new phone number:")
                                             info['phone'] = newp
@@ -243,7 +266,8 @@ def delete_or_edit():
                                         case '1':
                                             newn = input("enter the new name:")
                                             contacts[newn] = contacts[name]
-                                            list(contacts.pop(name))
+                                            contacts.pop(name)
+                                            save_contacts()
                                         case '2':
                                             newp = input("enter new phone number:")
                                             info['phone'] = newp
@@ -267,3 +291,4 @@ view_contacts()
 search_contact()
 delete_or_edit()
 view_contacts()
+
